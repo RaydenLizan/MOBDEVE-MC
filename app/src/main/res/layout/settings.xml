@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_settings"
+    android:layout_width="match_parent"
+    android:background="#045c5a"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_border3"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="#fca500"
+        app:layout_constraintBottom_toTopOf="@+id/tv_settings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_border4"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="#fca500"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_settings" />
+
+    <TextView
+        android:id="@+id/tv_settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#3e4768"
+        android:fontFamily="@font/akronim"
+        android:gravity="center_horizontal|top"
+        android:text="Settings"
+        android:textColor="#fca500"
+        android:textSize="60sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_border4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_border3" />
+
+    <TextView
+        android:id="@+id/tv_rounds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Number of Rounds"
+        android:textColor="#fca500"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_border4" />
+
+    <LinearLayout
+        android:id="@+id/ll_rounds"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_rounds">
+
+        <Button
+            android:id="@+id/btn_play"
+            app:backgroundTint="#3e4768"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_weight="0.3"
+            android:text="6 Rounds" />
+
+        <Button
+            android:id="@+id/btn_settings"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight=".3"
+            app:backgroundTint="#3e4768"
+            android:text="12 Rounds"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_weight=".3"
+            android:text="18 Rounds"
+            app:backgroundTint="#3e4768"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_se"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Sound Effects"
+        android:textColor="#fca500"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_rounds" />
+
+    <LinearLayout
+        android:id="@+id/ll_mute"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_se">
+
+        <Button
+            android:id="@+id/bt_mute"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="0.3"
+            app:backgroundTint="#3e4768"
+            android:text="Mute" />
+
+        <Button
+            android:id="@+id/bt_unmute"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight=".3"
+            android:text="Unmute"
+            app:backgroundTint="#3e4768"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
