@@ -27,4 +27,9 @@ public class ViewHolderPlayer1 extends RecyclerView.ViewHolder {
     public void setCard(int cardImg) {
         this.card.setImageResource(cardImg);
     }
+
+
+    public void setCardOnClickListener(View.OnClickListener onClickListener) {
+        this.card.setOnClickListener(onClickListener);
+    }
 }

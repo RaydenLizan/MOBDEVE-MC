@@ -9,7 +9,7 @@ public class SlavePlayerHelper {
         int[] image = {R.drawable.emperor, R.drawable.slave, R.drawable.citizen};
 
         ArrayList<Card> data = new ArrayList<>();
-        for(int i = 0; i < 4; i++) {
+        for(int i = 0; i < 3; i++) {
             data.add(new Card(
                     type[2],
                     image[2]));
