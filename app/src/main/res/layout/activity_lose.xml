@@ -7,7 +7,7 @@
     android:background="@drawable/round">
 
     <Button
-        android:id="@+id/bmain_win"
+        android:id="@+id/bmain_lose"
         android:layout_width="142dp"
         android:layout_height="43dp"
         android:layout_marginTop="19dp"
@@ -18,39 +18,38 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_descrip_win" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_descrip_lose" />
 
     <TextView
-        android:id="@+id/tv_title_win"
+        android:id="@+id/tv_title_lose"
         android:layout_width="264dp"
         android:layout_height="106dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="40dp"
         android:fontFamily="@font/akronim"
         android:gravity="center"
-        android:text="You Win!"
+        android:text="You Lose!"
         android:textColor="@color/white"
         android:textSize="60sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_descrip_win"
+        android:id="@+id/tv_descrip_lose"
         android:layout_width="243dp"
         android:layout_height="154dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="56dp"
         android:background="@drawable/round_text"
         android:fontFamily="serif"
         android:gravity="center"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:text="Congratulations Kaiji! you defeated Hitomo without losing an ear!"
-        android:textColor="@color/white"
+        android:text="Shame! Your faith in the cards is misplaced! Hirotomi has claimed you"
+        android:textColor="#B80C0C"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title_win" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_lose" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

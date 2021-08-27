@@ -1,10 +1,17 @@
 package com.mobdeve.g15.mco1;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +24,7 @@ import java.util.ArrayList;
 public class GameActivity extends AppCompatActivity {
     private static RecyclerView rvPlayer1;
     private static RecyclerView rvPlayer2;
+    private static GameActivity[] gameArray;
 
     private RecyclerView.LayoutManager layoutManager1;
     private RecyclerView.LayoutManager layoutManager2;
@@ -34,11 +42,13 @@ public class GameActivity extends AppCompatActivity {
 
     private static int round;
 
+    private static View CL_game;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game);
-
         this.initRecyclerView();
         //this.tv_score1 = findViewById(R.id.tv_score_player);
         //this.tv_score2 = findViewById(R.id.tv_score_opponent);
@@ -49,13 +59,20 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
+
+
     private void initRecyclerView(){
         rvPlayer1 = findViewById(R.id.rv_player);
         rvPlayer2 = findViewById(R.id.rv_opponent);
+        gameArray = new GameActivity[2];
+        Log.i("Main Activity", gameArray.toString());
+        gameArray[0] = this;
+        Log.i("Main Activity", gameArray[0].toString());
 
         tv_score1 = findViewById(R.id.tv_score_player);
         tv_score2 = findViewById(R.id.tv_score_opponent);
 
+        CL_game = findViewById(R.id.CL_game);
         //Every round
         tv_score1.setText(String.valueOf(0));
         tv_score2.setText(String.valueOf(0));
@@ -75,7 +92,7 @@ public class GameActivity extends AppCompatActivity {
         hand2 = slaveHelper.initializeData();
 
         //Call these 4 statements again with updated hand1 and hand2 every round
-        adapter1 = new GameAdapterPlayer1(hand1, hand2);
+        adapter1 = new GameAdapterPlayer1(hand1, hand2, gameArray);
         rvPlayer1.setAdapter(adapter1);
         adapter2 = new GameAdapterPlayer2(hand2);
         rvPlayer2.setAdapter(adapter2);
@@ -85,7 +102,7 @@ public class GameActivity extends AppCompatActivity {
     //if 0 tie
     //if 1 player win
     //-1 player lose
-    public static void updateRound(int whoWon, int index, boolean winAsSlave)
+    public void updateRound(int whoWon, int index, boolean winAsSlave)
     {
 
         if(whoWon == 1)
@@ -122,7 +139,7 @@ public class GameActivity extends AppCompatActivity {
 
             Log.i("GAMEACTIVITY", hand1.toString());
             Log.i("GAMEACTIVITY", hand2.toString());
-            adapter1 = new GameAdapterPlayer1(hand1, hand2);
+            adapter1 = new GameAdapterPlayer1(hand1, hand2, gameArray);
             rvPlayer1.setAdapter(adapter1);
             adapter2 = new GameAdapterPlayer2(hand2);
             rvPlayer2.setAdapter(adapter2);
@@ -145,7 +162,7 @@ public class GameActivity extends AppCompatActivity {
                 }
 
 
-                adapter1 = new GameAdapterPlayer1(hand1, hand2);
+                adapter1 = new GameAdapterPlayer1(hand1, hand2, gameArray);
                 rvPlayer1.setAdapter(adapter1);
                 adapter2 = new GameAdapterPlayer2(hand2);
                 rvPlayer2.setAdapter(adapter2);
@@ -153,6 +170,16 @@ public class GameActivity extends AppCompatActivity {
         }
 
         else {
+            GameActivity game = new GameActivity();
+            if(score1 > score2){
+                Intent intent = new Intent(GameActivity.this, WinActivity.class);
+                GameActivity.this.startActivity(intent);
+            }
+            else{
+                Intent intent = new Intent(GameActivity.this, LoseActivity.class);
+                GameActivity.this.startActivity(intent);
+
+            }
 
         }
 
@@ -160,8 +187,17 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
+    public void onLOSEClick(View view) {
 
 
+
+    }
+
+
+    public void onWINClick() {
+        Intent intent = new Intent(GameActivity.this, WinActivity.class);
+        GameActivity.this.startActivity(intent);
+    }
 }
 
 

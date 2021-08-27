@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:background="@drawable/round">
 
     <Button
@@ -39,13 +40,13 @@
         android:id="@+id/tv_descrip_win"
         android:layout_width="243dp"
         android:layout_height="154dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/round_text"
         android:fontFamily="serif"
         android:gravity="center"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:text="Congratulations Kaiji! you defeated Hitomo without losing an ear!"
+        android:text="Congratulations Kaiji! You defeated Hitomo without losing an ear!"
         android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
