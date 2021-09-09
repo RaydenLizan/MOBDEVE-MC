@@ -13,7 +13,7 @@ public class WinActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_win);
+        setContentView(R.layout.win_activity);
 
 
         DisplayMetrics dm = new DisplayMetrics();

@@ -5,26 +5,26 @@
     android:id="@+id/CL_game"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#045c5a"
+    android:background="@drawable/wood"
+    android:weightSum="1"
     tools:context=".MainActivity">
 
     <LinearLayout
         android:id="@+id/ll_scores"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
+        android:background="@drawable/chinese"
         android:gravity="center"
         android:orientation="horizontal"
-        android:weightSum="1"
         app:layout_constraintBottom_toTopOf="@+id/rv_player"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_opponent">
+        app:layout_constraintTop_toBottomOf="@+id/rv_opponent"
+        app:layout_constraintVertical_bias="0.562"
+        tools:layout_editor_absoluteX="-16dp">
 
         <TextView
             android:id="@+id/tv_score_player"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:layout_marginStart="76dp"
             android:layout_marginLeft="76dp"
             android:layout_marginTop="52dp"
@@ -39,8 +39,6 @@
             android:id="@+id/tv_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="52dp"
-            android:layout_marginBottom="57dp"
             android:layout_weight="0.8"
             android:gravity="center"
             android:text="SCORE"
@@ -50,7 +48,7 @@
         <TextView
             android:id="@+id/tv_score_opponent"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:layout_marginTop="52dp"
             android:layout_marginEnd="84dp"
             android:layout_marginRight="84dp"
@@ -64,28 +62,27 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_player"
-        android:layout_width="412dp"
-        android:layout_height="290dp"
-        android:layout_marginBottom="3dp"
-        android:foregroundGravity="center_vertical"
-        android:paddingLeft="20dp"
-        android:paddingTop="20dp"
-        android:paddingRight="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="135dp"
+        android:foregroundGravity="center_vertical|center"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_opponent"
-        android:layout_width="412dp"
-        android:layout_height="290dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginLeft="1dp"
-        android:layout_marginTop="1dp"
-        android:paddingLeft="20dp"
-        android:paddingTop="20dp"
-        android:paddingRight="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="128dp"
+        android:foregroundGravity="center"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 

@@ -28,6 +28,7 @@ public class GameActivity extends AppCompatActivity {
 
     private RecyclerView.LayoutManager layoutManager1;
     private RecyclerView.LayoutManager layoutManager2;
+    private View activityView;
     private static GameAdapterPlayer1 adapter1;
     private static GameAdapterPlayer2 adapter2;
 
@@ -55,6 +56,16 @@ public class GameActivity extends AppCompatActivity {
         score1 = 0;
         score2 = 0;
         round = 0;
+        this.activityView = getWindow().getDecorView().getRootView();
+
+        findViewById(R.id.CL_game).post(new Runnable() {
+            public void run() {
+
+                showInstructions(activityView);
+            }
+        });
+
+
 
 
     }
@@ -97,44 +108,47 @@ public class GameActivity extends AppCompatActivity {
         adapter2 = new GameAdapterPlayer2(hand2);
         rvPlayer2.setAdapter(adapter2);
 
+
+
     }
 
     //if 0 tie
     //if 1 player win
     //-1 player lose
-    public void updateRound(int whoWon, int index, boolean winAsSlave)
-    {
+    public void updateRound(int whoWon, int index, boolean winAsSlave) {
 
-        if(whoWon == 1)
-        {
-            if(winAsSlave)
+        if (whoWon == 1) {
+            if (winAsSlave) {
                 score1 += 3;
-            else
+                this.onButtonShowPopupWindowClick(this.activityView, R.layout.win_round3);
+            }
+            else {
                 score1++;
+                this.onButtonShowPopupWindowClick(this.activityView, R.layout.win_round);
+            }
 
             tv_score1.setText(String.valueOf(score1));
-        }
-        else if(whoWon == -1)
-        {
-            if(winAsSlave)
+        } else if (whoWon == -1) {
+
+            if (winAsSlave)
+            {
                 score2 += 3;
-            else
-                score2++;
-
-            tv_score2.setText(String.valueOf(score2));
-        }
-
-        else{
-            hand1.remove(index);
-            if(hand2.get(0).getType() == "Citizen") {
-                hand2.remove(0);
+                this.onButtonShowPopupWindowClick(this.activityView, R.layout.lose_round3);
             }
-
             else
             {
-                hand2.remove(1);
+                score2++;
+                this.onButtonShowPopupWindowClick(this.activityView, R.layout.lose_round);
             }
 
+            tv_score2.setText(String.valueOf(score2));
+        } else {
+            hand1.remove(index);
+            if (hand2.get(0).getType() == "Citizen") {
+                hand2.remove(0);
+            } else {
+                hand2.remove(1);
+            }
 
 
             Log.i("GAMEACTIVITY", hand1.toString());
@@ -147,8 +161,10 @@ public class GameActivity extends AppCompatActivity {
 
         round++;
 
+
         //change based of settings
-        if(round < 12) {
+        if (round < 12) {
+
             if (round % 3 == 0) {
                 KingPlayerHelper kingHelper = new KingPlayerHelper();
                 SlavePlayerHelper slaveHelper = new SlavePlayerHelper();
@@ -166,16 +182,16 @@ public class GameActivity extends AppCompatActivity {
                 rvPlayer1.setAdapter(adapter1);
                 adapter2 = new GameAdapterPlayer2(hand2);
                 rvPlayer2.setAdapter(adapter2);
-            }
-        }
+                Log.i("GAME OUTSIDE", "Testing 2");
 
-        else {
+
+            }
+        } else {
             GameActivity game = new GameActivity();
-            if(score1 > score2){
+            if (score1 > score2) {
                 Intent intent = new Intent(GameActivity.this, WinActivity.class);
                 GameActivity.this.startActivity(intent);
-            }
-            else{
+            } else {
                 Intent intent = new Intent(GameActivity.this, LoseActivity.class);
                 GameActivity.this.startActivity(intent);
 
@@ -184,20 +200,71 @@ public class GameActivity extends AppCompatActivity {
         }
 
 
-
-    }
-
-    public void onLOSEClick(View view) {
-
-
-
     }
 
 
-    public void onWINClick() {
-        Intent intent = new Intent(GameActivity.this, WinActivity.class);
-        GameActivity.this.startActivity(intent);
+    public void onButtonShowPopupWindowClick(View view, int layout) {
+
+        // inflate the layout of the popup window
+        LayoutInflater inflater = (LayoutInflater)
+                getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(layout, null);
+
+        Log.i("GAME", "test");
+        // create the popup window
+        int width = dpToPx(300, this);
+        int height = dpToPx(300, this);
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+        // show the popup window
+        // which view you pass in doesn't matter, it is only used for the window tolken
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+        // dismiss the popup window when touched
+        popupView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popupWindow.dismiss();
+                return true;
+            }
+        });
     }
+
+    public void showInstructions(View view) {
+
+        // inflate the layout of the popup window
+        LayoutInflater inflater = (LayoutInflater)
+                getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.instructions, null);
+
+        Log.i("GAME", "test");
+        // create the popup window
+        int width = LinearLayout.LayoutParams.MATCH_PARENT;
+        int height = LinearLayout.LayoutParams.MATCH_PARENT;
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+        // show the popup window
+        // which view you pass in doesn't matter, it is only used for the window tolken
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+        // dismiss the popup window when touched
+        popupView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popupWindow.dismiss();
+                return true;
+            }
+        });
+    }
+
+    public static int dpToPx(int dp, Context context) {
+        float density = context.getResources().getDisplayMetrics().density;
+        return Math.round((float) dp * density);
+    }
+
+
 }
 
 
