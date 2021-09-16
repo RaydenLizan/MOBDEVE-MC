@@ -60,7 +60,7 @@ public class GameAdapterPlayer1 extends RecyclerView.Adapter<ViewHolderPlayer1> 
                     Log.i("Adapter", "Type: " + type);
                     Log.i("Adapter", "OpponentType: " + opponentType);
                     game[0].updateRound(1, position, false);
-                    Toast.makeText(v.getContext(), "Hirotomi Citizens bow to your Emperor's might! you win! you gain +1 point", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(v.getContext(), "Hirotomi Citizens bow to your Emperor's might! you win! you gain +1 point", Toast.LENGTH_LONG).show();
                 }
 
                 else if(type.equals("Emperor") && opponentType.equals("Slave"))
@@ -69,7 +69,7 @@ public class GameAdapterPlayer1 extends RecyclerView.Adapter<ViewHolderPlayer1> 
                     Log.i("Adapter", "Type: " + type);
                     Log.i("Adapter", "OpponentType: " + opponentType);
                     game[0].updateRound(-1, position, true);
-                    Toast.makeText(v.getContext(), "Hirotomi Slave killed your Emperor! you lose! Hirotomi gains +3 points", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(v.getContext(), "Hirotomi Slave killed your Emperor! you lose! Hirotomi gains +3 points", Toast.LENGTH_LONG).show();
                 }
 
                 else if(type.equals("Citizen") && opponentType.equals("Slave"))
@@ -78,7 +78,7 @@ public class GameAdapterPlayer1 extends RecyclerView.Adapter<ViewHolderPlayer1> 
                     Log.i("Adapter", "Type: " + type);
                     Log.i("Adapter", "OpponentType: " + opponentType);
                     game[0].updateRound(1, position, false);
-                    Toast.makeText(v.getContext(), "Your Citizens have punished Hirotomi's slave through death! you win! you gain +1 points", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(v.getContext(), "Your Citizens have punished Hirotomi's slave through death! you win! you gain +1 points", Toast.LENGTH_LONG).show();
                 }
 
 
@@ -88,7 +88,7 @@ public class GameAdapterPlayer1 extends RecyclerView.Adapter<ViewHolderPlayer1> 
                     Log.i("Adapter", "Type: " + type);
                     Log.i("Adapter", "OpponentType: " + opponentType);
                     game[0].updateRound(1, position, true);
-                    Toast.makeText(v.getContext(), "Your Slave's insurrection has toppled Hirotomi's Emperor! you win! you gain +3 points", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(v.getContext(), "Your Slave's insurrection has toppled Hirotomi's Emperor! you win! you gain +3 points", Toast.LENGTH_LONG).show();
                 }
 
                 else if(type == "Citizen" && opponentType == "Emperor")
@@ -97,7 +97,7 @@ public class GameAdapterPlayer1 extends RecyclerView.Adapter<ViewHolderPlayer1> 
                     Log.i("Adapter", "Type: " + type);
                     Log.i("Adapter", "OpponentType: " + opponentType);
                     game[0].updateRound(-1, position, false);
-                    Toast.makeText(v.getContext(), "Hirotomi's Emperor executes your citizen for treason! you lose! Hirotomi gains +1 point", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(v.getContext(), "Hirotomi's Emperor executes your citizen for treason! you lose! Hirotomi gains +1 point", Toast.LENGTH_LONG).show();
                 }
 
                 else if(type == "Slave" && opponentType == "Citizen")
@@ -106,7 +106,7 @@ public class GameAdapterPlayer1 extends RecyclerView.Adapter<ViewHolderPlayer1> 
                     Log.i("Adapter", "Type: " + type);
                     Log.i("Adapter", "OpponentType: " + opponentType);
                     game[0].updateRound(-1, position, false);
-                    Toast.makeText(v.getContext(), "Your Slave was stoned by Hirotomi's Citizens! you lose! Hirotomi gains +1 points", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(v.getContext(), "Your Slave was stoned by Hirotomi's Citizens! you lose! Hirotomi gains +1 points", Toast.LENGTH_LONG).show();
                 }
 
                 else {
@@ -114,7 +114,7 @@ public class GameAdapterPlayer1 extends RecyclerView.Adapter<ViewHolderPlayer1> 
                     Log.i("Adapter", "Type: " + type);
                     Log.i("Adapter", "OpponentType: " + opponentType);
                     game[0].updateRound(0, position, false);
-                    Toast.makeText(v.getContext(), "Hirotomi used Citizen! it's a draw! +0 points", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(v.getContext(), "Hirotomi used Citizen! it's a draw! +0 points", Toast.LENGTH_LONG).show();
                 }
 
 

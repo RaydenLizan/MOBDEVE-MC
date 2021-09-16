@@ -47,14 +47,43 @@
         android:id="@+id/tv_rounds"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginLeft="44dp"
+        android:layout_marginTop="28dp"
         android:fontFamily="sans-serif-medium"
         android:text="Number of Rounds"
         android:textColor="#fca500"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_border4" />
+
+    <TextView
+        android:id="@+id/tv_rounds3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Choose your character:"
+        android:textColor="#fca500"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_rounds" />
+
+    <TextView
+        android:id="@+id/tv_rounds4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="28dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Current character"
+        android:textColor="#fca500"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_avatarPreview" />
 
     <LinearLayout
         android:id="@+id/ll_rounds"
@@ -68,77 +97,120 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_rounds">
 
         <Button
-            android:id="@+id/btn_play"
-            app:backgroundTint="#3e4768"
+            android:id="@+id/btn_6Rounds"
             android:layout_width="0dp"
-            android:layout_height="70dp"
+            android:layout_height="50dp"
             android:layout_weight="0.3"
-            android:text="6 Rounds" />
+            android:text="6 Rounds"
+            app:backgroundTint="#3e4768" />
 
         <Button
-            android:id="@+id/btn_settings"
+            android:id="@+id/btn_12Rounds"
             android:layout_width="0dp"
-            android:layout_height="70dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_weight=".3"
-            app:backgroundTint="#3e4768"
             android:text="12 Rounds"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            app:backgroundTint="#3e4768" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btn_18Rounds"
             android:layout_width="0dp"
-            android:layout_height="70dp"
+            android:layout_height="50dp"
             android:layout_weight=".3"
             android:text="18 Rounds"
-            app:backgroundTint="#3e4768"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            app:backgroundTint="#3e4768" />
+
     </LinearLayout>
 
     <TextView
         android:id="@+id/tv_se"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
         android:fontFamily="sans-serif-medium"
-        android:text="Sound Effects"
+        android:text="Highscore:"
         android:textColor="#fca500"
         android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_score_num"
+        app:layout_constraintTop_toTopOf="@+id/tv_border4" />
+
+    <TextView
+        android:id="@+id/tv_score_num"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="108dp"
+        android:layout_marginRight="108dp"
+        android:fontFamily="sans-serif-black"
+        android:textColor="#fca500"
+        android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_rounds" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_border4" />
 
-    <LinearLayout
-        android:id="@+id/ll_mute"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:weightSum="1"
+    <TextView
+        android:id="@+id/tv_roundsNum"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="#fca500"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/tv_rounds"
+        app:layout_constraintTop_toBottomOf="@+id/tv_border4" />
+
+    <ImageView
+        android:id="@+id/iv_character1"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:clickable="true"
+        app:layout_constraintStart_toEndOf="@+id/tv_rounds3"
+        app:layout_constraintTop_toBottomOf="@+id/ll_rounds"
+        app:srcCompat="@drawable/kaiji" />
+
+    <ImageView
+        android:id="@+id/iv_character2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="20dp"
+        android:clickable="true"
+        app:layout_constraintStart_toEndOf="@+id/iv_character1"
+        app:layout_constraintTop_toBottomOf="@+id/ll_rounds"
+        app:srcCompat="@drawable/kazutaka_hyodo" />
+
+    <ImageView
+        android:id="@+id/iv_character3"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="20dp"
+        android:clickable="true"
+        app:layout_constraintStart_toEndOf="@+id/iv_character2"
+        app:layout_constraintTop_toBottomOf="@+id/ll_rounds"
+        app:srcCompat="@drawable/kazuya_hyodou" />
+
+    <ImageView
+        android:id="@+id/iv_avatarPreview"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginRight="68dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_se">
-
-        <Button
-            android:id="@+id/bt_mute"
-            android:layout_width="0dp"
-            android:layout_height="70dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="0.3"
-            app:backgroundTint="#3e4768"
-            android:text="Mute" />
-
-        <Button
-            android:id="@+id/bt_unmute"
-            android:layout_width="0dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="10dp"
-            android:layout_weight=".3"
-            android:text="Unmute"
-            app:backgroundTint="#3e4768"
-            android:textSize="14sp" />
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/ll_rounds"
+        app:srcCompat="@drawable/kaiji" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

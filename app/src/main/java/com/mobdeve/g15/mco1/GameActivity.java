@@ -10,14 +10,26 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -41,15 +53,64 @@ public class GameActivity extends AppCompatActivity {
     private static TextView tv_score1;
     private static TextView tv_score2;
 
-    private static int round;
+    private int round;
+    private int roundMax;
+
+    private FirebaseUser user;
+    private FirebaseAuth mAuth;
+    private String userId;
+    private DatabaseReference reference;
 
     private static View CL_game;
+    private int highscore;
+
+    private TextView roundsDisplay;
+    private ImageView playerImage;
+    private String avatar;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game);
+        roundMax = 6;
+        this.mAuth = FirebaseAuth.getInstance();
+        this.user = this.mAuth.getCurrentUser();
+        this.userId = this.user.getUid();
+        avatar = "kaiji";
+
+        reference = FirebaseDatabase.getInstance("https://egame-55b1c-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users");
+        reference.child(this.userId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                roundMax = Integer.parseInt(snapshot.child("rounds").getValue().toString());
+                avatar = snapshot.child("image").getValue().toString();
+                highscore = Integer.parseInt(snapshot.child("highscore").getValue().toString());
+
+                playerImage = findViewById(R.id.iv_gamePlayerImage);
+                if(avatar.equals("kaiji"))
+                {
+                    playerImage.setImageResource(R.drawable.kaiji);
+                }
+
+                else if(avatar.equals("kazutaka_hyodo"))
+                {
+                    playerImage.setImageResource(R.drawable.kazutaka_hyodo);
+                }
+
+                else {
+                    playerImage.setImageResource(R.drawable.kazuya_hyodou);
+                }
+                Log.i("IMAGE", avatar);
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+
         this.initRecyclerView();
         //this.tv_score1 = findViewById(R.id.tv_score_player);
         //this.tv_score2 = findViewById(R.id.tv_score_opponent);
@@ -68,6 +129,8 @@ public class GameActivity extends AppCompatActivity {
 
 
 
+
+
     }
 
 
@@ -82,11 +145,17 @@ public class GameActivity extends AppCompatActivity {
 
         tv_score1 = findViewById(R.id.tv_score_player);
         tv_score2 = findViewById(R.id.tv_score_opponent);
+        roundsDisplay = findViewById(R.id.tv_gameRoundsNum);
 
         CL_game = findViewById(R.id.CL_game);
         //Every round
         tv_score1.setText(String.valueOf(0));
         tv_score2.setText(String.valueOf(0));
+
+
+
+
+        //Log.i("IMAGE ACTUAL", String.valueOf(R.drawable.kaiji));
 
         //Log.i("GAMEACTIVITY", this.rvPlayer1.toString());
 
@@ -107,6 +176,8 @@ public class GameActivity extends AppCompatActivity {
         rvPlayer1.setAdapter(adapter1);
         adapter2 = new GameAdapterPlayer2(hand2);
         rvPlayer2.setAdapter(adapter2);
+
+
 
 
 
@@ -157,13 +228,16 @@ public class GameActivity extends AppCompatActivity {
             rvPlayer1.setAdapter(adapter1);
             adapter2 = new GameAdapterPlayer2(hand2);
             rvPlayer2.setAdapter(adapter2);
+
+            this.onButtonShowPopupWindowClick(this.activityView, R.layout.draw_round);
         }
 
         round++;
+        roundsDisplay.setText(String.valueOf(round+1));
 
 
         //change based of settings
-        if (round < 12) {
+        if (round < roundMax) {
 
             if (round % 3 == 0) {
                 KingPlayerHelper kingHelper = new KingPlayerHelper();
@@ -187,14 +261,19 @@ public class GameActivity extends AppCompatActivity {
 
             }
         } else {
-            GameActivity game = new GameActivity();
+
+            if(score1 > highscore)
+                reference.child(userId).child("highscore").setValue(score1);
+
             if (score1 > score2) {
                 Intent intent = new Intent(GameActivity.this, WinActivity.class);
                 GameActivity.this.startActivity(intent);
-            } else {
+            } else if(score2 > score1) {
                 Intent intent = new Intent(GameActivity.this, LoseActivity.class);
                 GameActivity.this.startActivity(intent);
-
+            } else {
+                Intent intent = new Intent(GameActivity.this, activity_tie.class);
+                GameActivity.this.startActivity(intent);
             }
 
         }
@@ -205,23 +284,21 @@ public class GameActivity extends AppCompatActivity {
 
     public void onButtonShowPopupWindowClick(View view, int layout) {
 
-        // inflate the layout of the popup window
+
         LayoutInflater inflater = (LayoutInflater)
                 getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(layout, null);
 
         Log.i("GAME", "test");
-        // create the popup window
+
         int width = dpToPx(300, this);
         int height = dpToPx(300, this);
-        boolean focusable = true; // lets taps outside the popup also dismiss it
+        boolean focusable = true;
         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
 
-        // show the popup window
-        // which view you pass in doesn't matter, it is only used for the window tolken
+
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
 
-        // dismiss the popup window when touched
         popupView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -233,23 +310,21 @@ public class GameActivity extends AppCompatActivity {
 
     public void showInstructions(View view) {
 
-        // inflate the layout of the popup window
+
         LayoutInflater inflater = (LayoutInflater)
                 getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.instructions, null);
 
         Log.i("GAME", "test");
-        // create the popup window
+
         int width = LinearLayout.LayoutParams.MATCH_PARENT;
         int height = LinearLayout.LayoutParams.MATCH_PARENT;
-        boolean focusable = true; // lets taps outside the popup also dismiss it
+        boolean focusable = true;
         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
 
-        // show the popup window
-        // which view you pass in doesn't matter, it is only used for the window tolken
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
 
-        // dismiss the popup window when touched
+
         popupView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

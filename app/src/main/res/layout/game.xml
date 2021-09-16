@@ -9,6 +9,18 @@
     android:weightSum="1"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/tv_gameRoundsNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="15dp"
+        android:text="1"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/tv_gameRounds"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:id="@+id/ll_scores"
         android:layout_width="match_parent"
@@ -58,6 +70,7 @@
             android:text="10"
             android:textColor="@color/white"
             android:textSize="28sp" />
+
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -87,5 +100,39 @@
         app:layout_constraintTop_toTopOf="parent">
 
     </androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/tv_gameRounds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="15dp"
+        android:text="Rounds:"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_gamePlayerImage"
+        android:layout_width="117dp"
+        android:layout_height="124dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginLeft="44dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_scores"
+        app:srcCompat="@drawable/kaiji" />
+
+    <ImageView
+        android:id="@+id/iv_gameOpponentImage"
+        android:layout_width="126dp"
+        android:layout_height="127dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginRight="44dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/yukio_tonegawa" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
